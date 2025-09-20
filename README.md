@@ -1,0 +1,13 @@
+- please make sure u change the DefaultConnection in the app setting with your local server db after you already created empty DB called "MOJTaskDemo"
+- open the project in the VS .net core 8.0
+- go to package manager console and run
+-   Update-Database command
+-   run the project it should work and you will see the lgoin page :
+-   http://localhost:5243/Account/Login
+-   <img width="1909" height="839" alt="image" src="https://github.com/user-attachments/assets/c5a0f15c-7b14-46fb-8621-3995f5993426" />
+- Users :
+-   admin / Admin@123
+-   manager / Manager@123
+-   user / User@123
+
+-   
