@@ -1,0 +1,59 @@
+﻿@* Dynamic AdminLTE 4 sidebar, filtered by permission claims *@
+@{
+    var canDashboard = User.HasPermission("DASHBOARD_VIEW");
+    var canUsers = User.HasPermission("USER_MANAGE");
+    var canProfile = User.HasPermission("PROFILE_VIEW"); // if you add a Profile link
+}
+
+<aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+    <!--begin::Sidebar Brand-->
+    <div class="sidebar-brand">
+        <a asp-controller="Home" asp-action="Index" class="brand-link">
+            <img src="~/assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image opacity-75 shadow" />
+            <span class="brand-text fw-light">AdminLTE 4</span>
+        </a>
+    </div>
+    <!--end::Sidebar Brand-->
+    <!--begin::Sidebar Wrapper-->
+    <div class="sidebar-wrapper">
+        <nav class="mt-2">
+            <ul class="nav sidebar-menu flex-column"
+                data-lte-toggle="treeview"
+                role="navigation"
+                aria-label="Main navigation"
+                data-accordion="false"
+                id="navigation">
+
+                @* Dashboard *@
+                @if (canDashboard)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           asp-area=""
+                           asp-controller="Home"
+                           asp-action="Dashboard">
+                            <i class="nav-icon bi bi-speedometer"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                }
+
+                @* User Management *@
+                @if (canUsers)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           asp-area=""
+                           asp-controller="Users"
+                           asp-action="Index">
+                            <i class="nav-icon bi bi-table"></i>
+                            <p>User Management</p>
+                        </a>
+                    </li>
+                }
+                 
+            </ul>
+        </nav>
+    </div>
+    <!--end::Sidebar Wrapper-->
+</aside>

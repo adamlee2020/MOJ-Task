@@ -1,0 +1,100 @@
+﻿@model List<MOJTaskDemo.Models.DTOs.UserDto>
+@{
+    ViewData["Title"] = "User Management";
+    var ok = TempData["ok"] as string;
+    var err = TempData["err"] as string;
+}
+<div class="container-fluid">
+    @if (!string.IsNullOrEmpty(ok))
+    {
+        <div class="alert alert-success">@ok</div>
+    }
+    @if (!string.IsNullOrEmpty(err))
+    {
+        <div class="alert alert-danger">@err</div>
+    }
+
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Users</h5>
+            <a class="btn btn-primary" href="~/Users/Create"><i class="fas fa-plus"></i> Add User</a>
+        </div>
+        <div class="card-body table-responsive p-0">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Full Name</th>
+                        <th>Roles</th>
+                        <th>Last Login</th>
+                        <th style="width:260px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var u in Model)
+                    {
+                        <tr>
+                            <td>@u.Username</td>
+                            <td>@u.FullName</td>
+                            <td>@string.Join(", ", u.Roles)</td>
+                            <td>@(u.LastLoginUtc?.ToString("yyyy-MM-dd HH:mm") ?? "-")</td>
+                            <td class="text-right">
+                                @if (@u.Username.ToLower()!="admin")
+                                {
+                                     <a class="btn btn-sm btn-secondary" href="~/Users/Edit/@u.Id"><i class="fas fa-edit"></i> Edit</a>
+
+                                <!-- Reset Password Button -->
+                                <button type="button"
+                                        class="btn btn-sm btn-warning"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#pw-@u.Id">
+                                  <i class="fas fa-key"></i> Reset
+                                </button>
+
+                                <!-- Delete Button -->
+                                <form asp-action="Delete" method="post" class="d-inline">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="id" value="@u.Id" />
+                                    <button type="submit" class="btn btn-sm btn-danger"
+                                            onclick="return confirm('Delete @u.Username?')">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </button>
+                                </form>
+                                }
+                               
+
+                                <!-- Reset Modal -->
+                                <div class="modal fade" id="pw-@u.Id" tabindex="-1" aria-labelledby="pwLabel-@u.Id" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <form asp-action="ResetPassword" method="post">
+                                                @Html.AntiForgeryToken()
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Reset Password: @u.Username</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <input type="hidden" name="UserId" value="@u.Id" />
+                                                    <div class="form-group">
+                                                        <label>New Password</label>
+                                                        <input name="NewPassword" class="form-control" type="password" required />
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-warning">Reset</button>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

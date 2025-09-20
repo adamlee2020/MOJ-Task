@@ -1,0 +1,60 @@
+﻿@model MOJTaskDemo.Models.DTOs.LoginDto
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+<div class="login-box">
+    <div class="login-logo">
+        <b>Admin</b>LTE
+    </div>
+    <!-- /.login-logo -->
+    <div class="card">
+        <div class="card-body login-card-body">
+            <p class="login-box-msg">Sign in to start your session</p>
+            <form asp-action="Login" method="post">
+                @Html.AntiForgeryToken()
+                <div class="input-group mb-3">
+                    <input asp-for="Username" class="form-control" autocomplete="username" />
+                    <div class="input-group-text"><span class="bi bi-envelope"></span></div>
+                </div>
+                <div class="input-group mb-3">
+                    <input asp-for="Password" type="password" class="form-control" autocomplete="current-password" />
+                    <div class="input-group-text"><span class="bi bi-lock-fill"></span></div>
+                </div>
+                <!--begin::Row-->
+                <div class="row">
+                    <div class="col-8">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                            <label class="form-check-label" for="flexCheckDefault"> Remember Me </label>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="text-danger mt-2">
+                            @Html.ValidationSummary()
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!--end::Row-->
+            </form>
+            @*  
+            <!-- /.social-auth-links -->
+            <p class="mb-1"><a href="forgot-password.html">I forgot my password</a></p>
+            <p class="mb-0">
+                <a href="register.html" class="text-center"> Register a new membership </a>
+            </p> *@
+        </div>
+        <!-- /.login-card-body -->
+    </div>
+</div>

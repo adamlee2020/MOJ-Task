@@ -1,6 +1,8 @@
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MOJ_Task.Models;
+using MOJ_Task.Security;
 
 namespace MOJ_Task.Controllers
 {
@@ -12,8 +14,15 @@ namespace MOJ_Task.Controllers
         {
             _logger = logger;
         }
-
+        [Authorize]
+        [Permission("All")]
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        [Permission("DASHBOARD_VIEW")]
+        public IActionResult Dashboard()
         {
             return View();
         }
