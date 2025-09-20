@@ -19,11 +19,11 @@ namespace MOJ_Task.Controllers
         public async Task<IActionResult> Create(CancellationToken ct)
         {
             ViewBag.Roles = await service.GetAllRolesAsync(ct);
-            return View(new UserEditDto());
+            return View(new UserAddDto());
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(UserEditDto dto, CancellationToken ct)
+        public async Task<IActionResult> Create(UserAddDto dto, CancellationToken ct)
         {
             if (!ModelState.IsValid)
             {

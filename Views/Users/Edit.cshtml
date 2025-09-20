@@ -27,10 +27,8 @@
                             <div class="col-md-4">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio"
-                                           value="@r.Id"
-                                           name="RoleIds"
-                                           id="r-@r.Id"
-                                           @(Model.RoleIds.Contains(r.Id) ? "checked" : "") required>
+                                           value="@r.Id" name="RoleId" id="r-@r.Id"
+                                           @(Model.RoleId == r.Id ? "checked" : "")>
                                     <label class="form-check-label" for="r-@r.Id">@r.Name</label>
                                 </div>
                             </div>

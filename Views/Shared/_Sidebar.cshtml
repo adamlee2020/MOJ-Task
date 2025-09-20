@@ -1,8 +1,7 @@
 ﻿@* Dynamic AdminLTE 4 sidebar, filtered by permission claims *@
 @{
-    var canDashboard = User.HasPermission("DASHBOARD_VIEW");
-    var canUsers = User.HasPermission("USER_MANAGE");
-    var canProfile = User.HasPermission("PROFILE_VIEW"); // if you add a Profile link
+    var viewDashboard = User.HasPermission("DASHBOARD_VIEW");
+    var viewUserManagement = User.HasPermission("USER_MANAGE");
 }
 
 <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
@@ -25,7 +24,7 @@
                 id="navigation">
 
                 @* Dashboard *@
-                @if (canDashboard)
+                @if (viewDashboard)
                 {
                     <li class="nav-item">
                         <a class="nav-link"
@@ -39,7 +38,7 @@
                 }
 
                 @* User Management *@
-                @if (canUsers)
+                @if (viewUserManagement)
                 {
                     <li class="nav-item">
                         <a class="nav-link"

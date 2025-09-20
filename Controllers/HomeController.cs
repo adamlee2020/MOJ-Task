@@ -8,12 +8,6 @@ namespace MOJ_Task.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
         [Authorize]
         [Permission("All")]
         public IActionResult Index()
@@ -23,11 +17,6 @@ namespace MOJ_Task.Controllers
 
         [Permission("DASHBOARD_VIEW")]
         public IActionResult Dashboard()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
         {
             return View();
         }
